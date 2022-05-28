@@ -1,32 +1,31 @@
 import pkg from 'prompt';
 const { get } = pkg;
 
-console.log("Podaj liczbę od 1 do 10, masz 20 prób:");
-let isLooping = true;
-let losowa = Number(Math.floor(Math.random() * 10) + 1);
 
-async function test() {
-    // pomoc w trafianiu :)
-    console.log(`${losowa} - Trafisz jak ją wpiszesz.`);
+async function main() {
+    let isLooping = true;
+    let ranNumber = Number(Math.floor(Math.random() * 10) + 1);
+    console.log("Type number from 1 to 10:");
+    // helper :) - remove for serious game
+    console.log(`${ranNumber} - you win, if typed.`);
 
-    for (let i = 0; i < 20; i++) {
+    while (isLooping) {
 
-        const result = await get(['liczba']);
+        const result = await get(['typedNumber']);
 
-        console.log("Wynik: ");
-        console.log(result.liczba);
+        console.log(`You have typed: ${result.typedNumber}`);
 
-        if (losowa == (result.liczba)) {
-            console.log("Udało się");
+        if (ranNumber == (result.typedNumber)) {
+            console.log("You win");
             isLooping = false;
         }
         else {
-            console.log("Spróbuj jeszcze raz...");
-            //nadal isLooping == true
+            console.log("Try again...");
+            // isLooping == true
         }
         if (isLooping === false) break;
     }
 }
 
-test();
+main();
 
